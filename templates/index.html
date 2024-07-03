@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -5,16 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Price Prediction</title>
 
-
     <!-- BootStrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-
     <!-- css -->
     <link rel="stylesheet" href="static/css/styles.css">
 
-
+    <style>
+        body {
+            background-image: url("static/images/travel.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+        }
+    </style>
 </head>
 
 <body>
@@ -30,13 +39,9 @@
 
     <br><br><br>
 
-
     <div class="container">
 
-
-
         <form action="\predict" method="post">
-
 
             <div class="row">
                 <div class="col-sm-6">
@@ -44,7 +49,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Departure Date</h5>
                             <!-- Departure -->
-                            <input type="datetime-local" name="Dep_Time" id="Dep_Time" required="required">
+                            <input type="datetime-local" name="Dep_Time" id="Dep_Time" required="required" min="{{ current_datetime }}">
                         </div>
                     </div>
                 </div>
@@ -56,7 +61,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Arrival Date</h5>
                             <!-- Arrival -->
-                            <input type="datetime-local" name="Arrival_Time" id="Arrival_Time" required="required">
+                            <input type="datetime-local" name="Arrival_Time" id="Arrival_Time" required="required" min="{{ current_datetime }}">
                         </div>
                     </div>
                 </div>
@@ -98,8 +103,6 @@
                 </div>
             </div>
 
-
-
             <br>
             <br>
             <br>
@@ -134,8 +137,7 @@
                                 <option value="Vistara">Vistara</option>
                                 <option value="Air Asia">Air Asia</option>
                                 <option value="GoAir">GoAir</option>
-                                <option value="Multiple carriers Premium economy">Multiple carriers Premium economy
-                                </option>
+                                <option value="Multiple carriers Premium economy">Multiple carriers Premium economy</option>
                                 <option value="Jet Airways Business">Jet Airways Business</option>
                                 <option value="Vistara Premium economy">Vistara Premium economy</option>
                                 <option value="Trujet">Trujet</option>
@@ -144,8 +146,6 @@
                     </div>
                 </div>
             </div>
-
-
 
             <br>
             <br>
@@ -160,12 +160,9 @@
 
         <br>
         <br>
-        
+        <!-- <p>©2020 Amar Mandal</p> -->
 
     </div>
-
-
-
 
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -177,6 +174,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            let now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            let minDateTime = now.toISOString().slice(0, 16);
+            document.getElementById('Dep_Time').setAttribute('min', minDateTime);
+            document.getElementById('Arrival_Time').setAttribute('min', minDateTime);
+        });
+    </script>
 
 </body>
 
