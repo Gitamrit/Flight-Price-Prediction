@@ -6,7 +6,7 @@ import seaborn as sns
 sns.set()
 
 
-
+# train
 train_data = pd.read_excel(r"E:\Price pred\FlightData_Train.xlsx")
 
 pd.set_option('display.max_columns', None)
